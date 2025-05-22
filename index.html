@@ -587,13 +587,15 @@ src="https://www.facebook.com/tr?id=1867963090730089&ev=PageView&noscript=1"
         </div>
 
         <div class="cta-container">
-          <button 
-          id="main-contact-btn" 
-          class="cta-btn"
-          onclick="window.location.href='https://lin.ee/WQfGz0J';">
-          <i class="fab fa-line line-icon"></i>
-          立即加入官方LINE
-        </button>
+          <a 
+            href="https://lin.ee/WQfGz0J" 
+            id="main-contact-btn" 
+            class="cta-btn"
+            target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-line line-icon"></i>
+            立即加入官方LINE
+          </a>
         </div>
       </div>
     </section>
@@ -634,6 +636,38 @@ src="https://www.facebook.com/tr?id=1867963090730089&ev=PageView&noscript=1"
       });
       
 
+      const ctaButton = document.getElementById('main-contact-btn');
+      
+      if (ctaButton) {
+        ctaButton.addEventListener('click', function(e) {
+
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'CompleteRegistration', {
+              content_name: '戰神塞特遊戲註冊',
+              content_category: '線上遊戲',
+              value: 1000,
+              currency: 'TWD'
+            });
+            
+        
+            fbq('track', 'Lead', {
+              content_name: 'LINE官方帳號加入',
+              content_category: '客戶開發'
+            });
+            
+            console.log('Facebook Pixel events fired: CompleteRegistration & Lead');
+          }
+          
+        
+          setTimeout(function() {
+            if (e.target.href) {
+              window.open(e.target.href, '_blank');
+            }
+          }, 100);
+          
+          e.preventDefault();
+        });
+      }
     });
   </script>
 </body>
