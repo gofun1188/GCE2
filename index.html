@@ -623,6 +623,22 @@ src="https://www.facebook.com/tr?id=709020061492517&ev=PageView&noscript=1" />
   </div>
 
   <script>
+    function trackContactEvent() {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact');
+        console.log('Facebook Pixel: Contact event tracked');
+      }
+      return true;
+    }
+
+    function trackRegisterEvent() {
+      if (typeof fbq === 'function') {
+        fbq('track', 'CompleteRegistration');
+        console.log('Facebook Pixel: Register event tracked');
+      }
+      return true;
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       let lastScrollTop = 0;
       const header = document.querySelector('.header');
